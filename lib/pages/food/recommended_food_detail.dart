@@ -1,26 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controllers/recommended_product_controller.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
+import 'package:food_delivery_app/utils/app_constants.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/widgets/app_icon.dart';
 import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/expandable_text_widget.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendedFoodDetail({Key? key, required this.pageId,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                  onTap: (){
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                  child: AppIcon(icon: Icons.clear),
+                ),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
@@ -29,7 +42,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               child: Container(
                 child: Center(
                     child:
-                        BigText(size: Dimensions.font26, text: "Chinese Side")),
+                        BigText(size: Dimensions.font26, text: product.name!)),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top: 5, bottom: 10),
                 decoration: BoxDecoration(
@@ -45,8 +58,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/image/food3.png",
+              background: Image.network(
+                AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -56,10 +69,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  child: ExpandableTextWidget(
-                    text:
-                        "- Cherry tomatoes 200 gr, \n- Chicken fillet 420 gr. \n- Parmesan cheese (or other hard cheese) 110 gr. \n- Iceberg salad 1 pc. \n- Loaf of 1 pc. \n- Olive oil 5 tspGarlic 2 clovesSalt to tasteGround black pepper to tasteFor the sauce: Chicken egg 2 pcs. \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste.  \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste- Cherry tomatoes 200 gr, \n- Chicken fillet 420 gr. \n- Parmesan cheese (or other hard cheese) 110 gr. \n- Iceberg salad 1 pc. \n- Loaf of 1 pc. \n- Olive oil 5 tspGarlic 2 clovesSalt to tasteGround black pepper to tasteFor the sauce: Chicken egg 2 pcs. \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste.  \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste- Cherry tomatoes 200 gr, \n- Chicken fillet 420 gr. \n- Parmesan cheese (or other hard cheese) 110 gr. \n- Iceberg salad 1 pc. \n- Loaf of 1 pc. \n- Olive oil 5 tspGarlic 2 clovesSalt to tasteGround black pepper to tasteFor the sauce: Chicken egg 2 pcs. \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste.  \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste. - Cherry tomatoes 200 gr, \n- Chicken fillet 420 gr. \n- Parmesan cheese (or other hard cheese) 110 gr. \n- Iceberg salad 1 pc. \n- Loaf of 1 pc. \n- Olive oil 5 tspGarlic 2 clovesSalt to tasteGround black pepper to tasteFor the sauce: Chicken egg 2 pcs. \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste.  \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste. - Cherry tomatoes 200 gr, \n- Chicken fillet 420 gr. \n- Parmesan cheese (or other hard cheese) 110 gr. \n- Iceberg salad 1 pc. \n- Loaf of 1 pc. \n- Olive oil 5 tspGarlic 2 clovesSalt to tasteGround black pepper to tasteFor the sauce: Chicken egg 2 pcs. \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste.  \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste. - Cherry tomatoes 200 gr, \n- Chicken fillet 420 gr. \n- Parmesan cheese (or other hard cheese) 110 gr. \n- Iceberg salad 1 pc. \n- Loaf of 1 pc. \n- Olive oil 5 tspGarlic 2 clovesSalt to tasteGround black pepper to tasteFor the sauce: Chicken egg 2 pcs. \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste.  \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste- Cherry tomatoes 200 gr, \n- Chicken fillet 420 gr. \n- Parmesan cheese (or other hard cheese) 110 gr. \n- Iceberg salad 1 pc. \n- Loaf of 1 pc. \n- Olive oil 5 tspGarlic 2 clovesSalt to tasteGround black pepper to tasteFor the sauce: Chicken egg 2 pcs. \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste.  \n- Mustard ½ tbspOlive oil 50 ml. \n- Garlic 2 cloves. \n- Parmesan cheese (or other hard cheese) 60 gr. \n- Lemon juice 2 tbspSalt to taste",
-                  ),
+                  child: ExpandableTextWidget(text: product.description!),
                   margin: EdgeInsets.only(
                       left: Dimensions.width20, right: Dimensions.width20),
                 ),
@@ -87,7 +97,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     backgroundColor: AppColors.mainColor,
                     icon: Icons.remove),
                 BigText(
-                  text: "\$12.88 " + " X " + " 0 ",
+                  text: "\$ ${product.price!}  X  0 ",
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),
