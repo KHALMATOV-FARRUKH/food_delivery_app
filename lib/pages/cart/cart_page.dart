@@ -84,14 +84,14 @@ class CartPage extends StatelessWidget {
                                           .indexOf(_cartList[index].product!);
                                   if (popularIndex >= 0) {
                                     Get.toNamed(RouteHelper.getPopularFood(
-                                        popularIndex, "cartpage"));
+                                        popularIndex, 'cartpage'));
                                   } else {
                                     var recommendedIndex =
                                         Get.find<RecommendedProductController>()
                                             .recommendedProductList
                                             .indexOf(_cartList[index].product!);
                                     Get.toNamed(RouteHelper.getRecommendedFood(
-                                        recommendedIndex, "cartpage"));
+                                        recommendedIndex, 'cartpage'));
                                   }
                                 },
                                 child: Container(
@@ -201,8 +201,8 @@ class CartPage extends StatelessWidget {
           ),
         ],
       ),
-        bottomNavigationBar: GetBuilder<CartController>(
-        builder: (cartController) {
+      bottomNavigationBar: GetBuilder<PopularProductController>(
+        builder: (popularProduct) {
           return Container(
             height: Dimensions.bottomHeightBar,
             padding: EdgeInsets.only(
@@ -233,9 +233,11 @@ class CartPage extends StatelessWidget {
                   child: Row(
                     children: [
 
+
                       SizedBox(width: Dimensions.width10 / 2),
-                      BigText(text: "\$ " + cartController.totalAmount.toString()),
+                      BigText(text: popularProduct.inCartItems.toString()),
                       SizedBox(width: Dimensions.width10 / 2),
+
 
                     ],
                   ),
@@ -251,7 +253,7 @@ class CartPage extends StatelessWidget {
                         left: Dimensions.width20,
                         right: Dimensions.width20),
                     child: BigText(
-                        text: "Check out",
+                        text: " | Add to card",
                         color: Colors.white),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius20),

@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:food_delivery_app/models/products_model.dart';
 
 class CartModel {
@@ -31,4 +33,19 @@ class CartModel {
     time = json['time'];
     product = ProductModel.fromJson(json['product']);
   }
+
+
+  Map<String, dynamic> toJson(){
+   return {
+     "id":this.id,
+     "name":this.name,
+     "prise":this.price,
+     "img":this.img,
+     "quantity":this.quantity,
+     "isExist":this.isExist,
+     "time":this.time,
+     "product":this.product!.toJson()
+   };
+  }
+
 }

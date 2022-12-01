@@ -7,19 +7,18 @@ import 'package:get/get.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
-
   CartController({required this.cartRepo});
-
   Map<int, CartModel> _items = {};
 
   Map<int, CartModel> get items => _items;
+
+  List<CartModel>storageItems=[];
 
   void addItem(ProductModel product, int quantity) {
     var totalQuantity = 0;
     if (_items.containsKey(product.id!)) {
       _items.update(product.id!, (value) {
-
-        totalQuantity = value.quantity!+quantity;
+        totalQuantity = value.quantity! + quantity;
 
         return CartModel(
           id: value.id,
@@ -33,7 +32,7 @@ class CartController extends GetxController {
         );
       });
 
-      if(totalQuantity<=0){
+      if (totalQuantity <= 0) {
         _items.remove(product.id);
       }
     } else {
@@ -59,6 +58,7 @@ class CartController extends GetxController {
         );
       }
     }
+    cartRepo.addToCartList(getItems);
     update();
   }
 
@@ -81,7 +81,7 @@ class CartController extends GetxController {
     return quantity;
   }
 
-  int get totalItems{
+  int get totalItems {
     var totalQuantity = 0;
     _items.forEach((key, value) {
       totalQuantity += value.quantity!;
@@ -89,18 +89,48 @@ class CartController extends GetxController {
     return totalQuantity;
   }
 
-  List<CartModel> get getItems{
+  List<CartModel> get getItems {
     return _items.entries.map((e) {
       return e.value;
     }).toList();
   }
 
-  int get totalAmount{
+
+
+
+  int get totalAmount {
     var total = 0;
 
-      _items.forEach((key, value) {
-        total += value.quantity!*value.price!;
-      });
+    _items.forEach((key, value) {
+      total += value.quantity! * value.price!;
+    });
     return total;
+  }
+
+  List<CartModel> getCartData() {
+    setCart = cartRepo.getCartList();
+    return storageItems;
+  }
+
+  set setCart(List<CartModel> items) {
+    storageItems = items;
+    // print("Length of cart items "+storageItems.length.toString());
+    for (int i = 0; i < storageItems.length; i++) {
+      _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
+    }
+  }
+
+  void addToHistory(){
+    cartRepo.addCartHistoryList();
+    clear();
+  }
+
+  void clear(){
+    _items={};
+    update();
+  }
+
+  List<CartModel> getCartHistoryList(){
+    return cartRepo.getCartHistoryList();
   }
 }

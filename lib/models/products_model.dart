@@ -3,9 +3,14 @@ class Product {
   int? _typeId;
   int? _offset;
   late List<ProductModel> _products;
+
   List<ProductModel> get products => _products;
 
-  Product({required totalSize, required typeId, required offset, required products}){
+  Product(
+      {required totalSize,
+      required typeId,
+      required offset,
+      required products}) {
     this._totalSize = totalSize;
     this._typeId = typeId;
     this._offset = offset;
@@ -60,5 +65,18 @@ class ProductModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     typeId = json['type_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": this.id,
+      "name": this.name,
+      "prise": this.price,
+      "img": this.img,
+      "location": this.location,
+      "createdAt": this.createdAt,
+      "updatedAt": this.updatedAt,
+      "typeId": this.typeId
+    };
   }
 }

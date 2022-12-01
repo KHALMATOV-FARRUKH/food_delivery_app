@@ -14,9 +14,12 @@ import 'package:food_delivery_app/widgets/expandable_text_widget.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
+
+
 class RecommendedFoodDetail extends StatelessWidget {
   final int pageId;
   final String page;
+
   const RecommendedFoodDetail({
     Key? key,
     required this.pageId,
@@ -41,9 +44,9 @@ class RecommendedFoodDetail extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      if(page=="cartpage"){
+                      if (page == "cartpage") {
                         Get.toNamed(RouteHelper.getCartPage());
-                      }else{
+                      } else {
                         Get.toNamed(RouteHelper.getInitial());
                       }
                     },
@@ -52,10 +55,10 @@ class RecommendedFoodDetail extends StatelessWidget {
                   // AppIcon(icon: Icons.shopping_cart_outlined),
                   GetBuilder<PopularProductController>(builder: (controller) {
                     return GestureDetector(
-                        onTap: (){
-                          if(controller.totalItems >= 1)
-                            Get.toNamed(RouteHelper.getCartPage());
-                        },
+                      onTap: () {
+                        // if (controller.totalItems >= 1)
+                          Get.toNamed(RouteHelper.getCartPage());
+                      },
                       child: Stack(
                         children: [
                           AppIcon(icon: Icons.shopping_cart_outlined),
@@ -70,7 +73,6 @@ class RecommendedFoodDetail extends StatelessWidget {
                                       iconColor: Colors.transparent,
                                       backgroundColor: AppColors.mainColor,
                                     ),
-
                                 )
                               : Container(),
                           Get.find<PopularProductController>().totalItems >= 1

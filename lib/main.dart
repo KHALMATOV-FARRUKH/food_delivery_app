@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:food_delivery_app/controllers/recommended_product_controller.dart';
 import 'package:food_delivery_app/pages/food/popular_food_detail.dart';
@@ -17,18 +19,21 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      // home: SplashScreen(),
-
-      initialRoute: RouteHelper.getSplashPage(),
-      getPages: RouteHelper.routes,
-    );
+  Get.find<CartController>().getCartData();
+   return GetBuilder<PopularProductController>(builder: (_){
+     return GetBuilder<RecommendedProductController>(builder: (_){
+       return GetMaterialApp(
+         debugShowCheckedModeBanner: false,
+         title: "Flutter Demo",
+         //home: SplashScreen(),
+         initialRoute: RouteHelper.getSplashPage(),
+         getPages: RouteHelper.routes,
+       );
+     });
+   });
   }
 }
