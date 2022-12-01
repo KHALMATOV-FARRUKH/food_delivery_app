@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/models/cart_model.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/app_constants.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
@@ -147,6 +148,7 @@ class CartHistory extends StatelessWidget {
                                           }
                                           Get.find<CartController>().setItems = moreOrder;
                                           Get.find<CartController>().addToCartList();
+                                          Get.toNamed(RouteHelper.getCartPage());
                                         },
                                         child: Container(
                                           padding: EdgeInsets.symmetric(horizontal: Dimensions.width10,
