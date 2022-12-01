@@ -39,7 +39,7 @@ class CartModel {
    return {
      "id":this.id,
      "name":this.name,
-     "prise":this.price,
+     "price":this.price,
      "img":this.img,
      "quantity":this.quantity,
      "isExist":this.isExist,

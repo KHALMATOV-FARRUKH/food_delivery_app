@@ -71,7 +71,7 @@ class ProductModel {
     return {
       "id": this.id,
       "name": this.name,
-      "prise": this.price,
+      "price": this.price,
       "img": this.img,
       "location": this.location,
       "createdAt": this.createdAt,
