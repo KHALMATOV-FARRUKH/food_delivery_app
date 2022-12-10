@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/base/custom_loader.dart';
 import 'package:food_delivery_app/base/show_custom_snackbar.dart';
 import 'package:food_delivery_app/controllers/auth_controller.dart';
 import 'package:food_delivery_app/pages/auth/sign_up_page.dart';
@@ -54,7 +55,7 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: GetBuilder<AuthController>(builder: (authController){
-        return SingleChildScrollView(
+        return !authController.isLoading? SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
@@ -176,7 +177,7 @@ class SignInPage extends StatelessWidget {
               ),
             ],
           ),
-        );
+        ):CustomLoader();
       })
     );
   }

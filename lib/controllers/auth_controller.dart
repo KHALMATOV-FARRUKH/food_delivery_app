@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 class AuthController extends GetxController implements GetxService {
   final AuthRepo authRepo;
 
-  AuthController({required this.authRepo});
+  AuthController({
+    required this.authRepo
+  });
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -28,11 +30,13 @@ class AuthController extends GetxController implements GetxService {
   }
 
   Future<ResponseModel> login(String email, String password) async {
+
     _isLoading = true;
     update();
     Response response = await authRepo.login(email, password);
     late ResponseModel responseModel;
     if(response.statusCode==200){
+
       authRepo.saveUserToken(response.body["token"]);
       responseModel = ResponseModel(true, response.body["token"]);
     }else{
@@ -45,5 +49,14 @@ class AuthController extends GetxController implements GetxService {
 
   void saveUserNumberAndPassword(String number, String password)  {
     authRepo.saveUserNumberAndPassword(number, password);
+  }
+
+  bool userLoggedIn() {
+    return authRepo.userLoggedIn();
+  }
+
+
+  bool clearSharedData(){
+    return authRepo.clearSharedData();
   }
 }
