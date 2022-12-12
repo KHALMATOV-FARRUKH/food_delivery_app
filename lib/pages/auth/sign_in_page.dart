@@ -1,9 +1,6 @@
-// import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/base/custom_loader.dart';
 import 'package:food_delivery_app/base/show_custom_snackbar.dart';
 import 'package:food_delivery_app/controllers/auth_controller.dart';
 import 'package:food_delivery_app/pages/auth/sign_up_page.dart';
@@ -28,26 +25,26 @@ class SignInPage extends StatelessWidget {
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
-       if(email.isEmpty) {
-        showCustomSnackBar("Type in your email address",
-            title: "Email address");
+      if (email.isEmpty) {
+        showCustomSnackBar("Type in your email address", title: "Email");
       } else if (!GetUtils.isEmail(email)) {
-        showCustomSnackBar("Type in a valid email address",
-            title: "Valid email address");
+        showCustomSnackBar(
+            "Type in a valid email address", title: "Valid email address");
       } else if (password.isEmpty) {
         showCustomSnackBar("Type in your password", title: "Password");
       } else if (password.length < 6) {
-        showCustomSnackBar("Password can not be less than six characters",
-            title: "Password");
+        showCustomSnackBar(
+            "Password can not be less than six characters", title: "Password");
       } else {
 
 
-        authController.login(email, password).then((status){
+        authController.login(email, password).then((status) {
           if(status.isSuccess){
             Get.toNamed(RouteHelper.getInitial());
           }else{
             showCustomSnackBar(status.message);
           }
+
         });
       }
     }
@@ -55,14 +52,11 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: GetBuilder<AuthController>(builder: (authController){
-        return !authController.isLoading? SingleChildScrollView(
+        return SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(
-                height: Dimensions.screenHeight * 0.05,
-              ),
-              //app logo
+              SizedBox(height: Dimensions.screenHeight * 0.05),
               Container(
                 height: Dimensions.screenHeight * 0.25,
                 child: Center(
@@ -75,7 +69,6 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               ),
-              //welcome
               Container(
                 margin: EdgeInsets.only(left: Dimensions.width20),
                 width: double.maxFinite,
@@ -85,7 +78,7 @@ class SignInPage extends StatelessWidget {
                     Text(
                       "Hello",
                       style: TextStyle(
-                        fontSize: Dimensions.font20 * 3,
+                        fontSize: Dimensions.font20 * 3 + Dimensions.font20 / 2,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -100,22 +93,19 @@ class SignInPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: Dimensions.height20),
-              //your email
               AppTextField(
                 textController: emailController,
                 hintText: "Email",
                 icon: Icons.email,
               ),
               SizedBox(height: Dimensions.height20),
-              //password
               AppTextField(
                 textController: passwordController,
                 hintText: "Password",
-                icon: Icons.password_sharp, isObscure: true,
+                icon: Icons.password_sharp,
+                isObscure: true,
               ),
-
               SizedBox(height: Dimensions.height20),
-              //tag line
               Row(
                 children: [
                   Expanded(child: Container()),
@@ -131,8 +121,7 @@ class SignInPage extends StatelessWidget {
                   SizedBox(width: Dimensions.width20),
                 ],
               ),
-              SizedBox(height: Dimensions.screenHeight * 0.05),
-              //sign in
+              SizedBox(height: Dimensions.screenHeight * 0.03),
               GestureDetector(
                 onTap: (){
                   _login(authController);
@@ -146,18 +135,17 @@ class SignInPage extends StatelessWidget {
                   ),
                   child: Center(
                     child: BigText(
-                      text: "Sign in",
+                      text: "Sign In",
                       size: Dimensions.font20 + Dimensions.font20 / 2,
                       color: Colors.white,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: Dimensions.screenHeight * 0.05),
-              //sign up options
+              SizedBox(height: Dimensions.screenHeight * 0.03),
               RichText(
                 text: TextSpan(
-                    text: "Don\'t have an account?",
+                    text: "Don\'t have an account? ",
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: Dimensions.font20,
@@ -168,17 +156,17 @@ class SignInPage extends StatelessWidget {
                           ..onTap = () => Get.to(() => SignUpPage(), transition: Transition.fade),
                         text: " Create",
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           color: AppColors.mainBlackColor,
                           fontSize: Dimensions.font20,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ]),
               ),
             ],
           ),
-        ):CustomLoader();
-      })
+        );
+      }),
     );
   }
 }

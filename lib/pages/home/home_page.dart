@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/pages/account/account_page.dart';
-import 'package:food_delivery_app/pages/auth/sign_in_page.dart';
 import 'package:food_delivery_app/pages/auth/sign_up_page.dart';
+
+
 import 'package:food_delivery_app/pages/cart/cart_history.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
 import 'package:food_delivery_app/utils/colors.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   List pages = [
     MainFoodPage(),
-    SignInPage(),
+    SignUpPage(),
     CartHistory(),
     AccountPage(),
   ];

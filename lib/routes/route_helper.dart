@@ -1,4 +1,4 @@
-import 'package:food_delivery_app/pages/auth/sign_in_page.dart';
+import 'package:food_delivery_app/pages/auth/sign_up_page.dart';
 import 'package:food_delivery_app/pages/cart/cart_page.dart';
 import 'package:food_delivery_app/pages/food/popular_food_detail.dart';
 import 'package:food_delivery_app/pages/home/home_page.dart';
@@ -34,7 +34,7 @@ class RouteHelper {
     }),
     GetPage(name: signIn, page: (){
 
-      return SignInPage();
+      return SignUpPage();
     }, transition: Transition.fade),
 
     GetPage(name: popularFood, page: (){
